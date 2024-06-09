@@ -4,7 +4,7 @@
 
 package implementation_2_onegenericevent.proxies;
 
-public class GatePLC
+public class GatePLC implements com.mendix.systemwideinterfaces.core.IEntityProxy
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject gatePLCMendixObject;
 
@@ -30,7 +30,7 @@ public class GatePLC
 		GatePLC_MonitoredItem("Implementation_2_OneGenericEvent.GatePLC_MonitoredItem"),
 		GatePLC_OpcUaServerCfg("Implementation_2_OneGenericEvent.GatePLC_OpcUaServerCfg");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -46,32 +46,28 @@ public class GatePLC
 
 	public GatePLC(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Implementation_2_OneGenericEvent.GatePLC"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected GatePLC(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject gatePLCMendixObject)
 	{
-		if (gatePLCMendixObject == null)
+		if (gatePLCMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Implementation_2_OneGenericEvent.GatePLC", gatePLCMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Implementation_2_OneGenericEvent.GatePLC");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, gatePLCMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.gatePLCMendixObject = gatePLCMendixObject;
 		this.context = context;
 	}
 
 	/**
-	 * @deprecated Use 'GatePLC.load(IContext, IMendixIdentifier)' instead.
-	 */
-	@java.lang.Deprecated
-	public static implementation_2_onegenericevent.proxies.GatePLC initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
-	{
-		return implementation_2_onegenericevent.proxies.GatePLC.load(context, mendixIdentifier);
-	}
-
-	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static implementation_2_onegenericevent.proxies.GatePLC initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -86,45 +82,15 @@ public class GatePLC
 
 	public static java.util.List<implementation_2_onegenericevent.proxies.GatePLC> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<implementation_2_onegenericevent.proxies.GatePLC> result = new java.util.ArrayList<implementation_2_onegenericevent.proxies.GatePLC>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//Implementation_2_OneGenericEvent.GatePLC" + xpathConstraint))
-			result.add(implementation_2_onegenericevent.proxies.GatePLC.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> implementation_2_onegenericevent.proxies.GatePLC.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-	/**
-	 * Set value of State
+	 * Get value of State
 	 * @param state
 	 */
 	public final implementation_2_onegenericevent.proxies.GateState getState()
@@ -139,9 +105,9 @@ public class GatePLC
 	public final implementation_2_onegenericevent.proxies.GateState getState(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.State.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return implementation_2_onegenericevent.proxies.GateState.valueOf((java.lang.String) obj);
 	}
 
@@ -161,10 +127,11 @@ public class GatePLC
 	 */
 	public final void setState(com.mendix.systemwideinterfaces.core.IContext context, implementation_2_onegenericevent.proxies.GateState state)
 	{
-		if (state != null)
+		if (state != null) {
 			getMendixObject().setValue(context, MemberNames.State.toString(), state.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.State.toString(), null);
+		}
 	}
 
 	/**
@@ -384,6 +351,7 @@ public class GatePLC
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of GatePLC_MonitoredItem
 	 */
 	public final java.util.List<opcuaclientmx.proxies.MonitoredItem> getGatePLC_MonitoredItem() throws com.mendix.core.CoreException
@@ -394,16 +362,19 @@ public class GatePLC
 	/**
 	 * @param context
 	 * @return value of GatePLC_MonitoredItem
+	 * @throws com.mendix.core.CoreException
 	 */
 	@SuppressWarnings("unchecked")
 	public final java.util.List<opcuaclientmx.proxies.MonitoredItem> getGatePLC_MonitoredItem(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<opcuaclientmx.proxies.MonitoredItem> result = new java.util.ArrayList<opcuaclientmx.proxies.MonitoredItem>();
+		java.util.List<opcuaclientmx.proxies.MonitoredItem> result = new java.util.ArrayList<>();
 		Object valueObject = getMendixObject().getValue(context, MemberNames.GatePLC_MonitoredItem.toString());
-		if (valueObject == null)
+		if (valueObject == null) {
 			return result;
-		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
+		}
+		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject)) {
 			result.add(opcuaclientmx.proxies.MonitoredItem.initialize(context, mendixObject));
+		}
 		return result;
 	}
 
@@ -423,13 +394,16 @@ public class GatePLC
 	 */
 	public final void setGatePLC_MonitoredItem(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<opcuaclientmx.proxies.MonitoredItem> gateplc_monitoreditem)
 	{
-		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (opcuaclientmx.proxies.MonitoredItem proxyObject : gateplc_monitoreditem)
-			identifiers.add(proxyObject.getMendixObject().getId());
+		var identifiers = gateplc_monitoreditem
+			.stream()
+			.map(proxyObject -> proxyObject.getMendixObject().getId())
+			.collect(java.util.stream.Collectors.toList());
+		
 		getMendixObject().setValue(context, MemberNames.GatePLC_MonitoredItem.toString(), identifiers);
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of GatePLC_OpcUaServerCfg
 	 */
 	public final opcuaclientmx.proxies.OpcUaServerCfg getGatePLC_OpcUaServerCfg() throws com.mendix.core.CoreException
@@ -440,13 +414,15 @@ public class GatePLC
 	/**
 	 * @param context
 	 * @return value of GatePLC_OpcUaServerCfg
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final opcuaclientmx.proxies.OpcUaServerCfg getGatePLC_OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		opcuaclientmx.proxies.OpcUaServerCfg result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.GatePLC_OpcUaServerCfg.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = opcuaclientmx.proxies.OpcUaServerCfg.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -466,23 +442,20 @@ public class GatePLC
 	 */
 	public final void setGatePLC_OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context, opcuaclientmx.proxies.OpcUaServerCfg gateplc_opcuaservercfg)
 	{
-		if (gateplc_opcuaservercfg == null)
+		if (gateplc_opcuaservercfg == null) {
 			getMendixObject().setValue(context, MemberNames.GatePLC_OpcUaServerCfg.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.GatePLC_OpcUaServerCfg.toString(), gateplc_opcuaservercfg.getMendixObject().getId());
+		}
 	}
 
-	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return gatePLCMendixObject;
 	}
 
-	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
@@ -491,9 +464,9 @@ public class GatePLC
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final implementation_2_onegenericevent.proxies.GatePLC that = (implementation_2_onegenericevent.proxies.GatePLC) obj;
@@ -508,21 +481,13 @@ public class GatePLC
 		return getMendixObject().hashCode();
 	}
 
-	/**
-	 * @return String name of this class
-	 */
+  /**
+   * Gives full name ("Module.Entity" name) of the type of the entity.
+   *
+   * @return the name
+   */
 	public static java.lang.String getType()
 	{
-		return "Implementation_2_OneGenericEvent.GatePLC";
-	}
-
-	/**
-	 * @return String GUID from this object, format: ID_0000000000
-	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
-	 */
-	@java.lang.Deprecated
-	public java.lang.String getGUID()
-	{
-		return "ID_" + getMendixObject().getId().toLong();
+		return entityName;
 	}
 }

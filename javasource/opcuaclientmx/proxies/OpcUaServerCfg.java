@@ -31,7 +31,7 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 		HasContents("HasContents"),
 		Size("Size");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -47,28 +47,23 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 
 	public OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "OpcUaClientMx.OpcUaServerCfg"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject opcUaServerCfgMendixObject)
 	{
 		super(context, opcUaServerCfgMendixObject);
-		if (!com.mendix.core.Core.isSubClassOf("OpcUaClientMx.OpcUaServerCfg", opcUaServerCfgMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a OpcUaClientMx.OpcUaServerCfg");
-	}
-
-	/**
-	 * @deprecated Use 'OpcUaServerCfg.load(IContext, IMendixIdentifier)' instead.
-	 */
-	@java.lang.Deprecated
-	public static opcuaclientmx.proxies.OpcUaServerCfg initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
-	{
-		return opcuaclientmx.proxies.OpcUaServerCfg.load(context, mendixIdentifier);
+		if (!com.mendix.core.Core.isSubClassOf(entityName, opcUaServerCfgMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 	}
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static opcuaclientmx.proxies.OpcUaServerCfg initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -83,10 +78,11 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 
 	public static java.util.List<opcuaclientmx.proxies.OpcUaServerCfg> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<opcuaclientmx.proxies.OpcUaServerCfg> result = new java.util.ArrayList<opcuaclientmx.proxies.OpcUaServerCfg>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//OpcUaClientMx.OpcUaServerCfg" + xpathConstraint))
-			result.add(opcuaclientmx.proxies.OpcUaServerCfg.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> opcuaclientmx.proxies.OpcUaServerCfg.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
@@ -270,7 +266,7 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 	}
 
 	/**
-	 * Set value of AuthenticationType
+	 * Get value of AuthenticationType
 	 * @param authenticationtype
 	 */
 	public final opcuaclientmx.proxies.AuthenticationType getAuthenticationType()
@@ -285,9 +281,9 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 	public final opcuaclientmx.proxies.AuthenticationType getAuthenticationType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.AuthenticationType.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return opcuaclientmx.proxies.AuthenticationType.valueOf((java.lang.String) obj);
 	}
 
@@ -307,10 +303,11 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 	 */
 	public final void setAuthenticationType(com.mendix.systemwideinterfaces.core.IContext context, opcuaclientmx.proxies.AuthenticationType authenticationtype)
 	{
-		if (authenticationtype != null)
+		if (authenticationtype != null) {
 			getMendixObject().setValue(context, MemberNames.AuthenticationType.toString(), authenticationtype.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.AuthenticationType.toString(), null);
+		}
 	}
 
 	/**
@@ -388,9 +385,9 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final opcuaclientmx.proxies.OpcUaServerCfg that = (opcuaclientmx.proxies.OpcUaServerCfg) obj;
@@ -405,22 +402,13 @@ public class OpcUaServerCfg extends system.proxies.FileDocument
 		return getMendixObject().hashCode();
 	}
 
-	/**
-	 * @return String name of this class
-	 */
+  /**
+   * Gives full name ("Module.Entity" name) of the type of the entity.
+   *
+   * @return the name
+   */
 	public static java.lang.String getType()
 	{
-		return "OpcUaClientMx.OpcUaServerCfg";
-	}
-
-	/**
-	 * @return String GUID from this object, format: ID_0000000000
-	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
-	 */
-	@java.lang.Override
-	@java.lang.Deprecated
-	public java.lang.String getGUID()
-	{
-		return "ID_" + getMendixObject().getId().toLong();
+		return entityName;
 	}
 }

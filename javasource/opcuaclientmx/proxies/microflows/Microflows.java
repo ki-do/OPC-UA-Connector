@@ -4,142 +4,460 @@
 
 package opcuaclientmx.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 
-public class Microflows
+public final class Microflows
 {
+	/**
+	 * Private constructor to prevent instantiation of this class. 
+	 */
+	private Microflows() {}
+
 	// These are the microflows for the OpcUaClientMx module
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aSu_ReinitializeSubscriptionsBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.ASu_ReinitializeSubscriptions");
+		return builder;
+	}
+
 	public static boolean aSu_ReinitializeSubscriptions(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		return (java.lang.Boolean) Core.microflowCall("OpcUaClientMx.ASu_ReinitializeSubscriptions").withParams(params).execute(context);
+		Object result = aSu_ReinitializeSubscriptionsBuilder().execute(context);
+		return (boolean) result;
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder bSd_GracefullyShutdownSubscriptionsBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.BSd_GracefullyShutdownSubscriptions");
+		return builder;
+	}
+
 	public static void bSd_GracefullyShutdownSubscriptions(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("OpcUaClientMx.BSd_GracefullyShutdownSubscriptions").withParams(params).execute(context);
+		bSd_GracefullyShutdownSubscriptionsBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_Create_OpcUaServerBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_Create_OpcUaServer");
+		return builder;
+	}
+
 	public static void mB_Create_OpcUaServer(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("OpcUaClientMx.MB_Create_OpcUaServer").withParams(params).execute(context);
+		mB_Create_OpcUaServerBuilder().execute(context);
 	}
-	public static void mB_DeleteSubscription(IContext context, opcuaclientmx.proxies.MonitoredItem _monitoredItem, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_DeleteSubscriptionBuilder(
+		opcuaclientmx.proxies.MonitoredItem _monitoredItem,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("MonitoredItem", _monitoredItem == null ? null : _monitoredItem.getMendixObject());
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_DeleteSubscription").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_DeleteSubscription");
+		builder = builder.withParam("MonitoredItem", _monitoredItem);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static void mB_OpcUaServerCfg_Browse(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg, opcuaclientmx.proxies.Troubleshooting _troubleshooting)
+
+	public static void mB_DeleteSubscription(
+		IContext context,
+		opcuaclientmx.proxies.MonitoredItem _monitoredItem,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		params.put("Troubleshooting", _troubleshooting == null ? null : _troubleshooting.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Browse").withParams(params).execute(context);
+		mB_DeleteSubscriptionBuilder(
+				_monitoredItem,
+				_opcUaServerCfg
+			)
+			.execute(context);
 	}
-	public static void mB_OpcUaServerCfg_Read(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg, opcuaclientmx.proxies.Troubleshooting _troubleshooting)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_BrowseBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		params.put("Troubleshooting", _troubleshooting == null ? null : _troubleshooting.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Read").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Browse");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		return builder;
 	}
-	public static void mB_OpcUaServerCfg_Subscribe_simple(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer, opcuaclientmx.proxies.Troubleshooting _troubleshooting)
+
+	public static void mB_OpcUaServerCfg_Browse(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		params.put("Troubleshooting", _troubleshooting == null ? null : _troubleshooting.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Subscribe_simple").withParams(params).execute(context);
+		mB_OpcUaServerCfg_BrowseBuilder(
+				_opcUaServerCfg,
+				_troubleshooting
+			)
+			.execute(context);
 	}
-	public static void mB_OpcUaServerCfg_Subscribe_wMsg(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer, opcuaclientmx.proxies.Troubleshooting _troubleshooting)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_GetDisplayNameBuilder(
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		params.put("Troubleshooting", _troubleshooting == null ? null : _troubleshooting.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Subscribe_wMsg").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_GetDisplayName");
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static void mB_OpcUaServerCfg_Write(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer, opcuaclientmx.proxies.Troubleshooting _troubleshooting)
+
+	public static void mB_OpcUaServerCfg_GetDisplayName(
+		IContext context,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		params.put("Troubleshooting", _troubleshooting == null ? null : _troubleshooting.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Write").withParams(params).execute(context);
+		mB_OpcUaServerCfg_GetDisplayNameBuilder(
+				_troubleshooting,
+				_opcUaServerCfg
+			)
+			.execute(context);
 	}
-	public static void mB_ReconnectExistingSubscriptions(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_MethodBuilder(
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_ReconnectExistingSubscriptions").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Method");
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static void mB_Save_OpcUaServer(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer)
+
+	public static void mB_OpcUaServerCfg_Method(
+		IContext context,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_Save_OpcUaServer").withParams(params).execute(context);
+		mB_OpcUaServerCfg_MethodBuilder(
+				_troubleshooting,
+				_opcUaServerCfg
+			)
+			.execute(context);
 	}
-	public static void mB_ShowAdvancedTroubleshooting(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_ReadBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_ShowAdvancedTroubleshooting").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Read");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		return builder;
 	}
-	public static void mB_Subscription_Refresh(IContext context, opcuaclientmx.proxies.MonitoredItem _monitoredItem, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+
+	public static void mB_OpcUaServerCfg_Read(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("MonitoredItem", _monitoredItem == null ? null : _monitoredItem.getMendixObject());
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_Subscription_Refresh").withParams(params).execute(context);
+		mB_OpcUaServerCfg_ReadBuilder(
+				_opcUaServerCfg,
+				_troubleshooting
+			)
+			.execute(context);
 	}
-	public static void mB_Subscription_Unsubscribe(IContext context, opcuaclientmx.proxies.MonitoredItem _subscription, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_Subscribe_simpleBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_Subscription_Unsubscribe").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Subscribe_simple");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		return builder;
 	}
-	public static void mB_TestConnectionOPCServer(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+
+	public static void mB_OpcUaServerCfg_Subscribe_simple(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.MB_TestConnectionOPCServer").withParams(params).execute(context);
+		mB_OpcUaServerCfg_Subscribe_simpleBuilder(
+				_opcUaServer,
+				_troubleshooting
+			)
+			.execute(context);
 	}
-	public static void reinitialzeSubscription(IContext context, opcuaclientmx.proxies.MonitoredItem _iteratorSubscription)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_Subscribe_wMsgBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("IteratorSubscription", _iteratorSubscription == null ? null : _iteratorSubscription.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.ReinitialzeSubscription").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Subscribe_wMsg");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		return builder;
 	}
-	public static boolean save_OpcUaServer(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer)
+
+	public static void mB_OpcUaServerCfg_Subscribe_wMsg(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		return (java.lang.Boolean) Core.microflowCall("OpcUaClientMx.Save_OpcUaServer").withParams(params).execute(context);
+		mB_OpcUaServerCfg_Subscribe_wMsgBuilder(
+				_opcUaServer,
+				_troubleshooting
+			)
+			.execute(context);
 	}
-	public static void subscriptionIncomingData_Process_TEST(IContext context, java.lang.String _payload, java.lang.String _subscriptionID, java.lang.String _monitoredItemID)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpcUaServerCfg_WriteBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Payload", _payload);
-		params.put("SubscriptionID", _subscriptionID);
-		params.put("MonitoredItemID", _monitoredItemID);
-		Core.microflowCall("OpcUaClientMx.SubscriptionIncomingData_Process_TEST").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_OpcUaServerCfg_Write");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		builder = builder.withParam("Troubleshooting", _troubleshooting);
+		return builder;
 	}
-	public static void subscriptionIncomingData_Process_wMessage_TEST(IContext context, opcuaclientmx.proxies.Message _message)
+
+	public static void mB_OpcUaServerCfg_Write(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer,
+		opcuaclientmx.proxies.Troubleshooting _troubleshooting
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("OpcUaClientMx.SubscriptionIncomingData_Process_wMessage_TEST").withParams(params).execute(context);
+		mB_OpcUaServerCfg_WriteBuilder(
+				_opcUaServer,
+				_troubleshooting
+			)
+			.execute(context);
 	}
-	public static void unsubscribeSubscription(IContext context, opcuaclientmx.proxies.MonitoredItem _iteratorSubscription, boolean _restartSubscriptionOnNextReboot)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_ReconnectExistingSubscriptionsBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("IteratorSubscription", _iteratorSubscription == null ? null : _iteratorSubscription.getMendixObject());
-		params.put("RestartSubscriptionOnNextReboot", _restartSubscriptionOnNextReboot);
-		Core.microflowCall("OpcUaClientMx.UnsubscribeSubscription").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_ReconnectExistingSubscriptions");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		return builder;
+	}
+
+	public static void mB_ReconnectExistingSubscriptions(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		mB_ReconnectExistingSubscriptionsBuilder(
+				_opcUaServer
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_Save_OpcUaServerBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_Save_OpcUaServer");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		return builder;
+	}
+
+	public static void mB_Save_OpcUaServer(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		mB_Save_OpcUaServerBuilder(
+				_opcUaServer
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_ShowAdvancedTroubleshootingBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_ShowAdvancedTroubleshooting");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
+	}
+
+	public static void mB_ShowAdvancedTroubleshooting(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		mB_ShowAdvancedTroubleshootingBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_Subscription_RefreshBuilder(
+		opcuaclientmx.proxies.MonitoredItem _monitoredItem,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_Subscription_Refresh");
+		builder = builder.withParam("MonitoredItem", _monitoredItem);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
+	}
+
+	public static void mB_Subscription_Refresh(
+		IContext context,
+		opcuaclientmx.proxies.MonitoredItem _monitoredItem,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		mB_Subscription_RefreshBuilder(
+				_monitoredItem,
+				_opcUaServerCfg
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_Subscription_UnsubscribeBuilder(
+		opcuaclientmx.proxies.MonitoredItem _subscription,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_Subscription_Unsubscribe");
+		builder = builder.withParam("Subscription", _subscription);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
+	}
+
+	public static void mB_Subscription_Unsubscribe(
+		IContext context,
+		opcuaclientmx.proxies.MonitoredItem _subscription,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		mB_Subscription_UnsubscribeBuilder(
+				_subscription,
+				_opcUaServerCfg
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_TestConnectionOPCServerBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.MB_TestConnectionOPCServer");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
+	}
+
+	public static void mB_TestConnectionOPCServer(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		mB_TestConnectionOPCServerBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder reinitialzeSubscriptionBuilder(
+		opcuaclientmx.proxies.MonitoredItem _iteratorSubscription
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.ReinitialzeSubscription");
+		builder = builder.withParam("IteratorSubscription", _iteratorSubscription);
+		return builder;
+	}
+
+	public static void reinitialzeSubscription(
+		IContext context,
+		opcuaclientmx.proxies.MonitoredItem _iteratorSubscription
+	)
+	{
+		reinitialzeSubscriptionBuilder(
+				_iteratorSubscription
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder save_OpcUaServerBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.Save_OpcUaServer");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		return builder;
+	}
+
+	public static boolean save_OpcUaServer(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		Object result = save_OpcUaServerBuilder(
+				_opcUaServer
+			)
+			.execute(context);
+		return (boolean) result;
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder subscriptionIncomingData_Process_TESTBuilder(
+		java.lang.String _payload,
+		java.lang.String _subscriptionID,
+		java.lang.String _monitoredItemID
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.SubscriptionIncomingData_Process_TEST");
+		builder = builder.withParam("Payload", _payload);
+		builder = builder.withParam("SubscriptionID", _subscriptionID);
+		builder = builder.withParam("MonitoredItemID", _monitoredItemID);
+		return builder;
+	}
+
+	public static void subscriptionIncomingData_Process_TEST(
+		IContext context,
+		java.lang.String _payload,
+		java.lang.String _subscriptionID,
+		java.lang.String _monitoredItemID
+	)
+	{
+		subscriptionIncomingData_Process_TESTBuilder(
+				_payload,
+				_subscriptionID,
+				_monitoredItemID
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder subscriptionIncomingData_Process_wMessage_TESTBuilder(
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.SubscriptionIncomingData_Process_wMessage_TEST");
+		builder = builder.withParam("Message", _message);
+		return builder;
+	}
+
+	public static void subscriptionIncomingData_Process_wMessage_TEST(
+		IContext context,
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		subscriptionIncomingData_Process_wMessage_TESTBuilder(
+				_message
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder unsubscribeSubscriptionBuilder(
+		opcuaclientmx.proxies.MonitoredItem _iteratorSubscription,
+		boolean _restartSubscriptionOnNextReboot
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClientMx.UnsubscribeSubscription");
+		builder = builder.withParam("IteratorSubscription", _iteratorSubscription);
+		builder = builder.withParam("RestartSubscriptionOnNextReboot", _restartSubscriptionOnNextReboot);
+		return builder;
+	}
+
+	public static void unsubscribeSubscription(
+		IContext context,
+		opcuaclientmx.proxies.MonitoredItem _iteratorSubscription,
+		boolean _restartSubscriptionOnNextReboot
+	)
+	{
+		unsubscribeSubscriptionBuilder(
+				_iteratorSubscription,
+				_restartSubscriptionOnNextReboot
+			)
+			.execute(context);
 	}
 }

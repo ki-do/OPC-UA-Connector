@@ -4,63 +4,132 @@
 
 package implementation_2_onegenericevent.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class Microflows
+public final class Microflows
 {
+	/**
+	 * Private constructor to prevent instantiation of this class. 
+	 */
+	private Microflows() {}
+
 	// These are the microflows for the Implementation_2_OneGenericEvent module
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_GetGateBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.DS_GetGate");
+		return builder;
+	}
+
 	public static java.util.List<implementation_2_onegenericevent.proxies.GatePLC> dS_GetGate(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		java.util.List<IMendixObject> objs = Core.microflowCall("Implementation_2_OneGenericEvent.DS_GetGate").withParams(params).execute(context);
-		java.util.List<implementation_2_onegenericevent.proxies.GatePLC> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(implementation_2_onegenericevent.proxies.GatePLC.initialize(context, obj));
-		}
-		return result;
+		Object result = dS_GetGateBuilder().execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> implementation_2_onegenericevent.proxies.GatePLC.initialize(context, obj));
 	}
-	public static void mB_CloseGate(IContext context, implementation_2_onegenericevent.proxies.GatePLC _gatePLC)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_CloseGateBuilder(
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("Implementation_2_OneGenericEvent.MB_CloseGate").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.MB_CloseGate");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
 	}
-	public static void mB_OpenGate(IContext context, implementation_2_onegenericevent.proxies.GatePLC _gatePLC)
+
+	public static void mB_CloseGate(
+		IContext context,
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("Implementation_2_OneGenericEvent.MB_OpenGate").withParams(params).execute(context);
+		mB_CloseGateBuilder(
+				_gatePLC
+			)
+			.execute(context);
 	}
-	public static void mB_ResetSubscriptions(IContext context, implementation_2_onegenericevent.proxies.GatePLC _gatePLC)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpenGateBuilder(
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("Implementation_2_OneGenericEvent.MB_ResetSubscriptions").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.MB_OpenGate");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
 	}
-	public static void mB_SetupSubscriptions(IContext context, implementation_2_onegenericevent.proxies.GatePLC _gatePLC)
+
+	public static void mB_OpenGate(
+		IContext context,
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("Implementation_2_OneGenericEvent.MB_SetupSubscriptions").withParams(params).execute(context);
+		mB_OpenGateBuilder(
+				_gatePLC
+			)
+			.execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_ResetSubscriptionsBuilder(
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.MB_ResetSubscriptions");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
+	}
+
+	public static void mB_ResetSubscriptions(
+		IContext context,
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
+	{
+		mB_ResetSubscriptionsBuilder(
+				_gatePLC
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_SetupSubscriptionsBuilder(
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.MB_SetupSubscriptions");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
+	}
+
+	public static void mB_SetupSubscriptions(
+		IContext context,
+		implementation_2_onegenericevent.proxies.GatePLC _gatePLC
+	)
+	{
+		mB_SetupSubscriptionsBuilder(
+				_gatePLC
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder nav_OpenDashboardBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.Nav_OpenDashboard");
+		return builder;
+	}
+
 	public static void nav_OpenDashboard(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Implementation_2_OneGenericEvent.Nav_OpenDashboard").withParams(params).execute(context);
+		nav_OpenDashboardBuilder().execute(context);
 	}
-	public static void uA_ProcessGateEvent(IContext context, opcuaclientmx.proxies.Message _message)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder uA_ProcessGateEventBuilder(
+		opcuaclientmx.proxies.Message _message
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("Implementation_2_OneGenericEvent.UA_ProcessGateEvent").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Implementation_2_OneGenericEvent.UA_ProcessGateEvent");
+		builder = builder.withParam("Message", _message);
+		return builder;
+	}
+
+	public static void uA_ProcessGateEvent(
+		IContext context,
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		uA_ProcessGateEventBuilder(
+				_message
+			)
+			.execute(context);
 	}
 }

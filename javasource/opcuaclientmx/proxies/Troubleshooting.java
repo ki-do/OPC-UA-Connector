@@ -4,7 +4,7 @@
 
 package opcuaclientmx.proxies;
 
-public class Troubleshooting
+public class Troubleshooting implements com.mendix.systemwideinterfaces.core.IEntityProxy
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject troubleshootingMendixObject;
 
@@ -22,10 +22,11 @@ public class Troubleshooting
 	{
 		ValueToWrite("ValueToWrite"),
 		NodeId("NodeId"),
+		MethodNodeId("MethodNodeId"),
 		Result("Result"),
 		Troubleshooting_OpcUaServerCfg("OpcUaClientMx.Troubleshooting_OpcUaServerCfg");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,32 +42,28 @@ public class Troubleshooting
 
 	public Troubleshooting(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "OpcUaClientMx.Troubleshooting"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Troubleshooting(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject troubleshootingMendixObject)
 	{
-		if (troubleshootingMendixObject == null)
+		if (troubleshootingMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("OpcUaClientMx.Troubleshooting", troubleshootingMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a OpcUaClientMx.Troubleshooting");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, troubleshootingMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.troubleshootingMendixObject = troubleshootingMendixObject;
 		this.context = context;
 	}
 
 	/**
-	 * @deprecated Use 'Troubleshooting.load(IContext, IMendixIdentifier)' instead.
-	 */
-	@java.lang.Deprecated
-	public static opcuaclientmx.proxies.Troubleshooting initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
-	{
-		return opcuaclientmx.proxies.Troubleshooting.load(context, mendixIdentifier);
-	}
-
-	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static opcuaclientmx.proxies.Troubleshooting initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,37 +76,6 @@ public class Troubleshooting
 		return opcuaclientmx.proxies.Troubleshooting.initialize(context, mendixObject);
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of ValueToWrite
 	 */
@@ -183,6 +149,42 @@ public class Troubleshooting
 	}
 
 	/**
+	 * @return value of MethodNodeId
+	 */
+	public final java.lang.String getMethodNodeId()
+	{
+		return getMethodNodeId(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of MethodNodeId
+	 */
+	public final java.lang.String getMethodNodeId(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.MethodNodeId.toString());
+	}
+
+	/**
+	 * Set value of MethodNodeId
+	 * @param methodnodeid
+	 */
+	public final void setMethodNodeId(java.lang.String methodnodeid)
+	{
+		setMethodNodeId(getContext(), methodnodeid);
+	}
+
+	/**
+	 * Set value of MethodNodeId
+	 * @param context
+	 * @param methodnodeid
+	 */
+	public final void setMethodNodeId(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String methodnodeid)
+	{
+		getMendixObject().setValue(context, MemberNames.MethodNodeId.toString(), methodnodeid);
+	}
+
+	/**
 	 * @return value of Result
 	 */
 	public final java.lang.String getResult()
@@ -219,6 +221,7 @@ public class Troubleshooting
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Troubleshooting_OpcUaServerCfg
 	 */
 	public final opcuaclientmx.proxies.OpcUaServerCfg getTroubleshooting_OpcUaServerCfg() throws com.mendix.core.CoreException
@@ -229,13 +232,15 @@ public class Troubleshooting
 	/**
 	 * @param context
 	 * @return value of Troubleshooting_OpcUaServerCfg
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final opcuaclientmx.proxies.OpcUaServerCfg getTroubleshooting_OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		opcuaclientmx.proxies.OpcUaServerCfg result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Troubleshooting_OpcUaServerCfg.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = opcuaclientmx.proxies.OpcUaServerCfg.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -255,23 +260,20 @@ public class Troubleshooting
 	 */
 	public final void setTroubleshooting_OpcUaServerCfg(com.mendix.systemwideinterfaces.core.IContext context, opcuaclientmx.proxies.OpcUaServerCfg troubleshooting_opcuaservercfg)
 	{
-		if (troubleshooting_opcuaservercfg == null)
+		if (troubleshooting_opcuaservercfg == null) {
 			getMendixObject().setValue(context, MemberNames.Troubleshooting_OpcUaServerCfg.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Troubleshooting_OpcUaServerCfg.toString(), troubleshooting_opcuaservercfg.getMendixObject().getId());
+		}
 	}
 
-	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return troubleshootingMendixObject;
 	}
 
-	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
@@ -280,9 +282,9 @@ public class Troubleshooting
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final opcuaclientmx.proxies.Troubleshooting that = (opcuaclientmx.proxies.Troubleshooting) obj;
@@ -297,21 +299,13 @@ public class Troubleshooting
 		return getMendixObject().hashCode();
 	}
 
-	/**
-	 * @return String name of this class
-	 */
+  /**
+   * Gives full name ("Module.Entity" name) of the type of the entity.
+   *
+   * @return the name
+   */
 	public static java.lang.String getType()
 	{
-		return "OpcUaClientMx.Troubleshooting";
-	}
-
-	/**
-	 * @return String GUID from this object, format: ID_0000000000
-	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
-	 */
-	@java.lang.Deprecated
-	public java.lang.String getGUID()
-	{
-		return "ID_" + getMendixObject().getId().toLong();
+		return entityName;
 	}
 }

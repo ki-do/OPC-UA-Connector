@@ -26,3 +26,4 @@ GPUCache/
 !/javascriptsource/**/node_modules/
 /nativemobile/builds/
 /packages/
+/vendorlib/temp/

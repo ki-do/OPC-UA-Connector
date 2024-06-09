@@ -37,7 +37,6 @@ public class OpcUaClientWrite {
 			if( logger.isTraceEnabled())
 				logger.trace(String.format("[Write-%s] Response from [Server:%s|NodeId:%s]; Response Data: %s",context.getExecutionId(), OpcUaServerCfg.getServerID(),nodeId,code.toString()) );
 
-			
 			return code;
 			//Read back of the written data, for test & control purposes
 

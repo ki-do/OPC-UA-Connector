@@ -4,7 +4,7 @@
 
 package opcuaclient_exampleimplementation.proxies;
 
-public class BrowseName
+public class BrowseName implements com.mendix.systemwideinterfaces.core.IEntityProxy
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject browseNameMendixObject;
 
@@ -26,7 +26,7 @@ public class BrowseName
 		NotNull("NotNull"),
 		BrowseName_OpcUaNode("OpcUaClient_ExampleImplementation.BrowseName_OpcUaNode");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -42,32 +42,28 @@ public class BrowseName
 
 	public BrowseName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "OpcUaClient_ExampleImplementation.BrowseName"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected BrowseName(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject browseNameMendixObject)
 	{
-		if (browseNameMendixObject == null)
+		if (browseNameMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("OpcUaClient_ExampleImplementation.BrowseName", browseNameMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a OpcUaClient_ExampleImplementation.BrowseName");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, browseNameMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.browseNameMendixObject = browseNameMendixObject;
 		this.context = context;
 	}
 
 	/**
-	 * @deprecated Use 'BrowseName.load(IContext, IMendixIdentifier)' instead.
-	 */
-	@java.lang.Deprecated
-	public static opcuaclient_exampleimplementation.proxies.BrowseName initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
-	{
-		return opcuaclient_exampleimplementation.proxies.BrowseName.load(context, mendixIdentifier);
-	}
-
-	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static opcuaclient_exampleimplementation.proxies.BrowseName initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -82,43 +78,13 @@ public class BrowseName
 
 	public static java.util.List<opcuaclient_exampleimplementation.proxies.BrowseName> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<opcuaclient_exampleimplementation.proxies.BrowseName> result = new java.util.ArrayList<opcuaclient_exampleimplementation.proxies.BrowseName>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//OpcUaClient_ExampleImplementation.BrowseName" + xpathConstraint))
-			result.add(opcuaclient_exampleimplementation.proxies.BrowseName.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> opcuaclient_exampleimplementation.proxies.BrowseName.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of NamespaceIndex
 	 */
@@ -264,6 +230,7 @@ public class BrowseName
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of BrowseName_OpcUaNode
 	 */
 	public final opcuaclient_exampleimplementation.proxies.OpcUaNode getBrowseName_OpcUaNode() throws com.mendix.core.CoreException
@@ -274,13 +241,15 @@ public class BrowseName
 	/**
 	 * @param context
 	 * @return value of BrowseName_OpcUaNode
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final opcuaclient_exampleimplementation.proxies.OpcUaNode getBrowseName_OpcUaNode(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		opcuaclient_exampleimplementation.proxies.OpcUaNode result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.BrowseName_OpcUaNode.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = opcuaclient_exampleimplementation.proxies.OpcUaNode.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -300,23 +269,20 @@ public class BrowseName
 	 */
 	public final void setBrowseName_OpcUaNode(com.mendix.systemwideinterfaces.core.IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode browsename_opcuanode)
 	{
-		if (browsename_opcuanode == null)
+		if (browsename_opcuanode == null) {
 			getMendixObject().setValue(context, MemberNames.BrowseName_OpcUaNode.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.BrowseName_OpcUaNode.toString(), browsename_opcuanode.getMendixObject().getId());
+		}
 	}
 
-	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return browseNameMendixObject;
 	}
 
-	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
@@ -325,9 +291,9 @@ public class BrowseName
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final opcuaclient_exampleimplementation.proxies.BrowseName that = (opcuaclient_exampleimplementation.proxies.BrowseName) obj;
@@ -342,21 +308,13 @@ public class BrowseName
 		return getMendixObject().hashCode();
 	}
 
-	/**
-	 * @return String name of this class
-	 */
+  /**
+   * Gives full name ("Module.Entity" name) of the type of the entity.
+   *
+   * @return the name
+   */
 	public static java.lang.String getType()
 	{
-		return "OpcUaClient_ExampleImplementation.BrowseName";
-	}
-
-	/**
-	 * @return String GUID from this object, format: ID_0000000000
-	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
-	 */
-	@java.lang.Deprecated
-	public java.lang.String getGUID()
-	{
-		return "ID_" + getMendixObject().getId().toLong();
+		return entityName;
 	}
 }

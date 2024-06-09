@@ -25,35 +25,45 @@ import encryption.pgp.PGPFileProcessor;
  */
 public class PGPEncryptDocument extends CustomJavaAction<java.lang.Boolean>
 {
-	private IMendixObject __ExternalPublicKey;
-	private system.proxies.FileDocument ExternalPublicKey;
-	private IMendixObject __DocumentToEncrypt;
-	private system.proxies.FileDocument DocumentToEncrypt;
-	private IMendixObject __OutputDocument;
-	private system.proxies.FileDocument OutputDocument;
-	private IMendixObject __SigningCertificate;
-	private encryption.proxies.PGPCertificate SigningCertificate;
+	/** @deprecated use ExternalPublicKey.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ExternalPublicKey;
+	private final system.proxies.FileDocument ExternalPublicKey;
+	/** @deprecated use DocumentToEncrypt.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DocumentToEncrypt;
+	private final system.proxies.FileDocument DocumentToEncrypt;
+	/** @deprecated use OutputDocument.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OutputDocument;
+	private final system.proxies.FileDocument OutputDocument;
+	/** @deprecated use SigningCertificate.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __SigningCertificate;
+	private final encryption.proxies.PGPCertificate SigningCertificate;
 
-	public PGPEncryptDocument(IContext context, IMendixObject ExternalPublicKey, IMendixObject DocumentToEncrypt, IMendixObject OutputDocument, IMendixObject SigningCertificate)
+	public PGPEncryptDocument(
+		IContext context,
+		IMendixObject _externalPublicKey,
+		IMendixObject _documentToEncrypt,
+		IMendixObject _outputDocument,
+		IMendixObject _signingCertificate
+	)
 	{
 		super(context);
-		this.__ExternalPublicKey = ExternalPublicKey;
-		this.__DocumentToEncrypt = DocumentToEncrypt;
-		this.__OutputDocument = OutputDocument;
-		this.__SigningCertificate = SigningCertificate;
+		this.__ExternalPublicKey = _externalPublicKey;
+		this.ExternalPublicKey = _externalPublicKey == null ? null : system.proxies.FileDocument.initialize(getContext(), _externalPublicKey);
+		this.__DocumentToEncrypt = _documentToEncrypt;
+		this.DocumentToEncrypt = _documentToEncrypt == null ? null : system.proxies.FileDocument.initialize(getContext(), _documentToEncrypt);
+		this.__OutputDocument = _outputDocument;
+		this.OutputDocument = _outputDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), _outputDocument);
+		this.__SigningCertificate = _signingCertificate;
+		this.SigningCertificate = _signingCertificate == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), _signingCertificate);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.ExternalPublicKey = __ExternalPublicKey == null ? null : system.proxies.FileDocument.initialize(getContext(), __ExternalPublicKey);
-
-		this.DocumentToEncrypt = __DocumentToEncrypt == null ? null : system.proxies.FileDocument.initialize(getContext(), __DocumentToEncrypt);
-
-		this.OutputDocument = __OutputDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __OutputDocument);
-
-		this.SigningCertificate = __SigningCertificate == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), __SigningCertificate);
-
 		// BEGIN USER CODE
 
 		PGPFileProcessor p = new PGPFileProcessor();
@@ -71,6 +81,7 @@ public class PGPEncryptDocument extends CustomJavaAction<java.lang.Boolean>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

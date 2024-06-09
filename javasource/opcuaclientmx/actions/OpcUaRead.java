@@ -25,22 +25,27 @@ import opcuaclientmx.impl.OpcUaClientManager;
 
 public class OpcUaRead extends CustomJavaAction<java.lang.String>
 {
-	private IMendixObject __OpcUaServerCfg;
-	private opcuaclientmx.proxies.OpcUaServerCfg OpcUaServerCfg;
-	private java.lang.String nodeId;
+	/** @deprecated use OpcUaServerCfg.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OpcUaServerCfg;
+	private final opcuaclientmx.proxies.OpcUaServerCfg OpcUaServerCfg;
+	private final java.lang.String nodeId;
 
-	public OpcUaRead(IContext context, IMendixObject OpcUaServerCfg, java.lang.String nodeId)
+	public OpcUaRead(
+		IContext context,
+		IMendixObject _opcUaServerCfg,
+		java.lang.String _nodeId
+	)
 	{
 		super(context);
-		this.__OpcUaServerCfg = OpcUaServerCfg;
-		this.nodeId = nodeId;
+		this.__OpcUaServerCfg = _opcUaServerCfg;
+		this.OpcUaServerCfg = _opcUaServerCfg == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), _opcUaServerCfg);
+		this.nodeId = _nodeId;
 	}
 
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.OpcUaServerCfg = __OpcUaServerCfg == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), __OpcUaServerCfg);
-
 		// BEGIN USER CODE
 		OpcUaClient client = OpcUaClientManager.retrieve(this.context(), this.OpcUaServerCfg);
 		logger.trace(String.format("[Read] Reading from [Server:%s|NodeId:%s]",this.OpcUaServerCfg.getServerID(),this.nodeId) );
@@ -87,6 +92,7 @@ public class OpcUaRead extends CustomJavaAction<java.lang.String>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

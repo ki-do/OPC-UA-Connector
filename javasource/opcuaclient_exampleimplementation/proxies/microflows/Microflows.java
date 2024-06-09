@@ -4,203 +4,464 @@
 
 package opcuaclient_exampleimplementation.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class Microflows
+public final class Microflows
 {
+	/**
+	 * Private constructor to prevent instantiation of this class. 
+	 */
+	private Microflows() {}
+
 	// These are the microflows for the OpcUaClient_ExampleImplementation module
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_GetGateBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.DS_GetGate");
+		return builder;
+	}
+
 	public static java.util.List<opcuaclient_exampleimplementation.proxies.GatePLC> dS_GetGate(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		java.util.List<IMendixObject> objs = Core.microflowCall("OpcUaClient_ExampleImplementation.DS_GetGate").withParams(params).execute(context);
-		java.util.List<opcuaclient_exampleimplementation.proxies.GatePLC> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(opcuaclient_exampleimplementation.proxies.GatePLC.initialize(context, obj));
-		}
-		return result;
+		Object result = dS_GetGateBuilder().execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> opcuaclient_exampleimplementation.proxies.GatePLC.initialize(context, obj));
 	}
-	public static opcuaclient_exampleimplementation.proxies.Set getOpcUaNodeSet(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder getOpcUaNodeSetBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("OpcUaClient_ExampleImplementation.GetOpcUaNodeSet").withParams(params).execute(context);
-		return result == null ? null : opcuaclient_exampleimplementation.proxies.Set.initialize(context, result);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.GetOpcUaNodeSet");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static opcuaclient_exampleimplementation.proxies.Set getSet(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+
+	public static opcuaclient_exampleimplementation.proxies.Set getOpcUaNodeSet(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("OpcUaClient_ExampleImplementation.GetSet").withParams(params).execute(context);
-		return result == null ? null : opcuaclient_exampleimplementation.proxies.Set.initialize(context, result);
+		Object result = getOpcUaNodeSetBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
+		return result == null ? null : opcuaclient_exampleimplementation.proxies.Set.initialize(context, (IMendixObject) result);
 	}
-	public static void mB_CloseGate(IContext context, opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder getSetBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MB_CloseGate").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.GetSet");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static void mB_OpenGate(IContext context, opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC)
+
+	public static opcuaclient_exampleimplementation.proxies.Set getSet(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MB_OpenGate").withParams(params).execute(context);
+		Object result = getSetBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
+		return result == null ? null : opcuaclient_exampleimplementation.proxies.Set.initialize(context, (IMendixObject) result);
 	}
-	public static void mB_ResetSubscriptions(IContext context, opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_CloseGateBuilder(
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MB_ResetSubscriptions").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MB_CloseGate");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
 	}
-	public static void mB_SetupSubscriptions(IContext context, opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC)
+
+	public static void mB_CloseGate(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("GatePLC", _gatePLC == null ? null : _gatePLC.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MB_SetupSubscriptions").withParams(params).execute(context);
+		mB_CloseGateBuilder(
+				_gatePLC
+			)
+			.execute(context);
 	}
-	public static void monitoredItem_Create(IContext context, java.lang.String _payload, java.lang.String _subscriptionID)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_OpenGateBuilder(
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Payload", _payload);
-		params.put("SubscriptionID", _subscriptionID);
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MonitoredItem_Create").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MB_OpenGate");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
 	}
+
+	public static void mB_OpenGate(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
+	{
+		mB_OpenGateBuilder(
+				_gatePLC
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_ResetSubscriptionsBuilder(
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MB_ResetSubscriptions");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
+	}
+
+	public static void mB_ResetSubscriptions(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
+	{
+		mB_ResetSubscriptionsBuilder(
+				_gatePLC
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder mB_SetupSubscriptionsBuilder(
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MB_SetupSubscriptions");
+		builder = builder.withParam("GatePLC", _gatePLC);
+		return builder;
+	}
+
+	public static void mB_SetupSubscriptions(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.GatePLC _gatePLC
+	)
+	{
+		mB_SetupSubscriptionsBuilder(
+				_gatePLC
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder monitoredItem_CreateBuilder(
+		java.lang.String _payload,
+		java.lang.String _subscriptionID
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MonitoredItem_Create");
+		builder = builder.withParam("Payload", _payload);
+		builder = builder.withParam("SubscriptionID", _subscriptionID);
+		return builder;
+	}
+
+	public static void monitoredItem_Create(
+		IContext context,
+		java.lang.String _payload,
+		java.lang.String _subscriptionID
+	)
+	{
+		monitoredItem_CreateBuilder(
+				_payload,
+				_subscriptionID
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder monitoredItem_DeleteBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.MonitoredItem_Delete");
+		return builder;
+	}
+
 	public static void monitoredItem_Delete(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("OpcUaClient_ExampleImplementation.MonitoredItem_Delete").withParams(params).execute(context);
+		monitoredItem_DeleteBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder nav_OpenDashboardBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.Nav_OpenDashboard");
+		return builder;
+	}
+
 	public static void nav_OpenDashboard(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("OpcUaClient_ExampleImplementation.Nav_OpenDashboard").withParams(params).execute(context);
+		nav_OpenDashboardBuilder().execute(context);
 	}
-	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_Browse_FromNode(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_Browse_FromNodeBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaNode", _opcUaNode == null ? null : _opcUaNode.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_FromNode").withParams(params).execute(context);
-		java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
-		}
-		return result;
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_FromNode");
+		builder = builder.withParam("OpcUaNode", _opcUaNode);
+		return builder;
 	}
-	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_Browse_FromSet(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode)
+
+	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_Browse_FromNode(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaNode", _opcUaNode == null ? null : _opcUaNode.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_FromSet").withParams(params).execute(context);
-		java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
-		}
-		return result;
+		Object result = opcUaNode_Browse_FromNodeBuilder(
+				_opcUaNode
+			)
+			.execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
 	}
-	public static void opcUaNode_Browse_TopLevel(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_Browse_FromSetBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_TopLevel").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_FromSet");
+		builder = builder.withParam("OpcUaNode", _opcUaNode);
+		return builder;
 	}
+
+	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_Browse_FromSet(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
+	{
+		Object result = opcUaNode_Browse_FromSetBuilder(
+				_opcUaNode
+			)
+			.execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_Browse_TopLevelBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Browse_TopLevel");
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		return builder;
+	}
+
+	public static void opcUaNode_Browse_TopLevel(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		opcUaNode_Browse_TopLevelBuilder(
+				_opcUaServer
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_CreateBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Create");
+		return builder;
+	}
+
 	public static opcuaclient_exampleimplementation.proxies.OpcUaNode opcUaNode_Create(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		IMendixObject result = (IMendixObject)Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Create").withParams(params).execute(context);
-		return result == null ? null : opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, result);
+		Object result = opcUaNode_CreateBuilder().execute(context);
+		return result == null ? null : opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, (IMendixObject) result);
 	}
-	public static void opcUaNode_DeleteAll(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_DeleteAllBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_DeleteAll").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_DeleteAll");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_GetForNodeView(IContext context, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+
+	public static void opcUaNode_DeleteAll(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_GetForNodeView").withParams(params).execute(context);
-		java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
-		}
-		return result;
+		opcUaNode_DeleteAllBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
 	}
-	public static void opcUaNode_Read(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_GetForNodeViewBuilder(
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaNode", _opcUaNode == null ? null : _opcUaNode.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Read").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_GetForNodeView");
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
 	}
-	public static void opcUaNode_Subscribe(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode)
+
+	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> opcUaNode_GetForNodeView(
+		IContext context,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaNode", _opcUaNode == null ? null : _opcUaNode.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Subscribe").withParams(params).execute(context);
+		Object result = opcUaNode_GetForNodeViewBuilder(
+				_opcUaServerCfg
+			)
+			.execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
 	}
-	public static void opcUaNode_Write(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_ReadBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpcUaNode", _opcUaNode == null ? null : _opcUaNode.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Write").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Read");
+		builder = builder.withParam("OpcUaNode", _opcUaNode);
+		return builder;
 	}
-	public static void processOpcUaNode(IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode _mappingParent, opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg)
+
+	public static void opcUaNode_Read(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("MappingParent", _mappingParent == null ? null : _mappingParent.getMendixObject());
-		params.put("ParentOpcUaNode", _parentOpcUaNode == null ? null : _parentOpcUaNode.getMendixObject());
-		params.put("OpcUaServerCfg", _opcUaServerCfg == null ? null : _opcUaServerCfg.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.ProcessOpcUaNode").withParams(params).execute(context);
+		opcUaNode_ReadBuilder(
+				_opcUaNode
+			)
+			.execute(context);
 	}
-	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> processOpcUaNodeList(IContext context, java.lang.String _result, opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode, opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_SubscribeBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Result", _result);
-		params.put("ParentOpcUaNode", _parentOpcUaNode == null ? null : _parentOpcUaNode.getMendixObject());
-		params.put("OpcUaServer", _opcUaServer == null ? null : _opcUaServer.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("OpcUaClient_ExampleImplementation.ProcessOpcUaNodeList").withParams(params).execute(context);
-		java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
-		}
-		return result;
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Subscribe");
+		builder = builder.withParam("OpcUaNode", _opcUaNode);
+		return builder;
 	}
-	public static void uA_ProcessEvent_GateDown(IContext context, opcuaclientmx.proxies.Message _message)
+
+	public static void opcUaNode_Subscribe(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateDown").withParams(params).execute(context);
+		opcUaNode_SubscribeBuilder(
+				_opcUaNode
+			)
+			.execute(context);
 	}
-	public static void uA_ProcessEvent_GateMoving(IContext context, opcuaclientmx.proxies.Message _message)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder opcUaNode_WriteBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateMoving").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.OpcUaNode_Write");
+		builder = builder.withParam("OpcUaNode", _opcUaNode);
+		return builder;
 	}
-	public static void uA_ProcessEvent_GateUp(IContext context, opcuaclientmx.proxies.Message _message)
+
+	public static void opcUaNode_Write(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _opcUaNode
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateUp").withParams(params).execute(context);
+		opcUaNode_WriteBuilder(
+				_opcUaNode
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder processOpcUaNodeBuilder(
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _mappingParent,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.ProcessOpcUaNode");
+		builder = builder.withParam("MappingParent", _mappingParent);
+		builder = builder.withParam("ParentOpcUaNode", _parentOpcUaNode);
+		builder = builder.withParam("OpcUaServerCfg", _opcUaServerCfg);
+		return builder;
+	}
+
+	public static void processOpcUaNode(
+		IContext context,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _mappingParent,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServerCfg
+	)
+	{
+		processOpcUaNodeBuilder(
+				_mappingParent,
+				_parentOpcUaNode,
+				_opcUaServerCfg
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder processOpcUaNodeListBuilder(
+		java.lang.String _result,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.ProcessOpcUaNodeList");
+		builder = builder.withParam("Result", _result);
+		builder = builder.withParam("ParentOpcUaNode", _parentOpcUaNode);
+		builder = builder.withParam("OpcUaServer", _opcUaServer);
+		return builder;
+	}
+
+	public static java.util.List<opcuaclient_exampleimplementation.proxies.OpcUaNode> processOpcUaNodeList(
+		IContext context,
+		java.lang.String _result,
+		opcuaclient_exampleimplementation.proxies.OpcUaNode _parentOpcUaNode,
+		opcuaclientmx.proxies.OpcUaServerCfg _opcUaServer
+	)
+	{
+		Object result = processOpcUaNodeListBuilder(
+				_result,
+				_parentOpcUaNode,
+				_opcUaServer
+			)
+			.execute(context);
+		return result == null ? null : com.mendix.utils.ListUtils.map((java.util.List<IMendixObject>) result, obj -> opcuaclient_exampleimplementation.proxies.OpcUaNode.initialize(context, obj));
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder uA_ProcessEvent_GateDownBuilder(
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateDown");
+		builder = builder.withParam("Message", _message);
+		return builder;
+	}
+
+	public static void uA_ProcessEvent_GateDown(
+		IContext context,
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		uA_ProcessEvent_GateDownBuilder(
+				_message
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder uA_ProcessEvent_GateMovingBuilder(
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateMoving");
+		builder = builder.withParam("Message", _message);
+		return builder;
+	}
+
+	public static void uA_ProcessEvent_GateMoving(
+		IContext context,
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		uA_ProcessEvent_GateMovingBuilder(
+				_message
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder uA_ProcessEvent_GateUpBuilder(
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("OpcUaClient_ExampleImplementation.UA_ProcessEvent_GateUp");
+		builder = builder.withParam("Message", _message);
+		return builder;
+	}
+
+	public static void uA_ProcessEvent_GateUp(
+		IContext context,
+		opcuaclientmx.proxies.Message _message
+	)
+	{
+		uA_ProcessEvent_GateUpBuilder(
+				_message
+			)
+			.execute(context);
 	}
 }

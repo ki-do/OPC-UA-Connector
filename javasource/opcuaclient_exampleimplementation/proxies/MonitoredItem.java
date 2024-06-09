@@ -4,7 +4,7 @@
 
 package opcuaclient_exampleimplementation.proxies;
 
-public class MonitoredItem
+public class MonitoredItem implements com.mendix.systemwideinterfaces.core.IEntityProxy
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject monitoredItemMendixObject;
 
@@ -24,7 +24,7 @@ public class MonitoredItem
 		SubscriptionID("SubscriptionID"),
 		MonitoredItem_OpcUaNode("OpcUaClient_ExampleImplementation.MonitoredItem_OpcUaNode");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -40,32 +40,28 @@ public class MonitoredItem
 
 	public MonitoredItem(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "OpcUaClient_ExampleImplementation.MonitoredItem"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected MonitoredItem(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject monitoredItemMendixObject)
 	{
-		if (monitoredItemMendixObject == null)
+		if (monitoredItemMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("OpcUaClient_ExampleImplementation.MonitoredItem", monitoredItemMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a OpcUaClient_ExampleImplementation.MonitoredItem");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, monitoredItemMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.monitoredItemMendixObject = monitoredItemMendixObject;
 		this.context = context;
 	}
 
 	/**
-	 * @deprecated Use 'MonitoredItem.load(IContext, IMendixIdentifier)' instead.
-	 */
-	@java.lang.Deprecated
-	public static opcuaclient_exampleimplementation.proxies.MonitoredItem initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
-	{
-		return opcuaclient_exampleimplementation.proxies.MonitoredItem.load(context, mendixIdentifier);
-	}
-
-	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static opcuaclient_exampleimplementation.proxies.MonitoredItem initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -80,43 +76,13 @@ public class MonitoredItem
 
 	public static java.util.List<opcuaclient_exampleimplementation.proxies.MonitoredItem> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<opcuaclient_exampleimplementation.proxies.MonitoredItem> result = new java.util.ArrayList<opcuaclient_exampleimplementation.proxies.MonitoredItem>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//OpcUaClient_ExampleImplementation.MonitoredItem" + xpathConstraint))
-			result.add(opcuaclient_exampleimplementation.proxies.MonitoredItem.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> opcuaclient_exampleimplementation.proxies.MonitoredItem.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of Payload
 	 */
@@ -190,6 +156,7 @@ public class MonitoredItem
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of MonitoredItem_OpcUaNode
 	 */
 	public final opcuaclient_exampleimplementation.proxies.OpcUaNode getMonitoredItem_OpcUaNode() throws com.mendix.core.CoreException
@@ -200,13 +167,15 @@ public class MonitoredItem
 	/**
 	 * @param context
 	 * @return value of MonitoredItem_OpcUaNode
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final opcuaclient_exampleimplementation.proxies.OpcUaNode getMonitoredItem_OpcUaNode(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		opcuaclient_exampleimplementation.proxies.OpcUaNode result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.MonitoredItem_OpcUaNode.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = opcuaclient_exampleimplementation.proxies.OpcUaNode.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -226,23 +195,20 @@ public class MonitoredItem
 	 */
 	public final void setMonitoredItem_OpcUaNode(com.mendix.systemwideinterfaces.core.IContext context, opcuaclient_exampleimplementation.proxies.OpcUaNode monitoreditem_opcuanode)
 	{
-		if (monitoreditem_opcuanode == null)
+		if (monitoreditem_opcuanode == null) {
 			getMendixObject().setValue(context, MemberNames.MonitoredItem_OpcUaNode.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.MonitoredItem_OpcUaNode.toString(), monitoreditem_opcuanode.getMendixObject().getId());
+		}
 	}
 
-	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return monitoredItemMendixObject;
 	}
 
-	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
-	 */
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
@@ -251,9 +217,9 @@ public class MonitoredItem
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final opcuaclient_exampleimplementation.proxies.MonitoredItem that = (opcuaclient_exampleimplementation.proxies.MonitoredItem) obj;
@@ -268,21 +234,13 @@ public class MonitoredItem
 		return getMendixObject().hashCode();
 	}
 
-	/**
-	 * @return String name of this class
-	 */
+  /**
+   * Gives full name ("Module.Entity" name) of the type of the entity.
+   *
+   * @return the name
+   */
 	public static java.lang.String getType()
 	{
-		return "OpcUaClient_ExampleImplementation.MonitoredItem";
-	}
-
-	/**
-	 * @return String GUID from this object, format: ID_0000000000
-	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
-	 */
-	@java.lang.Deprecated
-	public java.lang.String getGUID()
-	{
-		return "ID_" + getMendixObject().getId().toLong();
+		return entityName;
 	}
 }

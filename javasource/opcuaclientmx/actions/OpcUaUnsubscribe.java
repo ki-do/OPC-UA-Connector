@@ -18,27 +18,34 @@ import opcuaclientmx.impl.SubscriptionManager;
 
 public class OpcUaUnsubscribe extends CustomJavaAction<java.lang.Void>
 {
-	private IMendixObject __OpcUaServerCfg;
-	private opcuaclientmx.proxies.OpcUaServerCfg OpcUaServerCfg;
-	private IMendixObject __MonitoredItemObject;
-	private opcuaclientmx.proxies.MonitoredItem MonitoredItemObject;
-	private java.lang.Boolean RestartSubscriptionOnNextReboot;
+	/** @deprecated use OpcUaServerCfg.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OpcUaServerCfg;
+	private final opcuaclientmx.proxies.OpcUaServerCfg OpcUaServerCfg;
+	/** @deprecated use MonitoredItemObject.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MonitoredItemObject;
+	private final opcuaclientmx.proxies.MonitoredItem MonitoredItemObject;
+	private final java.lang.Boolean RestartSubscriptionOnNextReboot;
 
-	public OpcUaUnsubscribe(IContext context, IMendixObject OpcUaServerCfg, IMendixObject MonitoredItemObject, java.lang.Boolean RestartSubscriptionOnNextReboot)
+	public OpcUaUnsubscribe(
+		IContext context,
+		IMendixObject _opcUaServerCfg,
+		IMendixObject _monitoredItemObject,
+		java.lang.Boolean _restartSubscriptionOnNextReboot
+	)
 	{
 		super(context);
-		this.__OpcUaServerCfg = OpcUaServerCfg;
-		this.__MonitoredItemObject = MonitoredItemObject;
-		this.RestartSubscriptionOnNextReboot = RestartSubscriptionOnNextReboot;
+		this.__OpcUaServerCfg = _opcUaServerCfg;
+		this.OpcUaServerCfg = _opcUaServerCfg == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), _opcUaServerCfg);
+		this.__MonitoredItemObject = _monitoredItemObject;
+		this.MonitoredItemObject = _monitoredItemObject == null ? null : opcuaclientmx.proxies.MonitoredItem.initialize(getContext(), _monitoredItemObject);
+		this.RestartSubscriptionOnNextReboot = _restartSubscriptionOnNextReboot;
 	}
 
 	@java.lang.Override
 	public java.lang.Void executeAction() throws Exception
 	{
-		this.OpcUaServerCfg = __OpcUaServerCfg == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), __OpcUaServerCfg);
-
-		this.MonitoredItemObject = __MonitoredItemObject == null ? null : opcuaclientmx.proxies.MonitoredItem.initialize(getContext(), __MonitoredItemObject);
-
 		// BEGIN USER CODE
 
 		OpcUaClient client = OpcUaClientManager.retrieve(context(), this.OpcUaServerCfg);
@@ -51,6 +58,7 @@ public class OpcUaUnsubscribe extends CustomJavaAction<java.lang.Void>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

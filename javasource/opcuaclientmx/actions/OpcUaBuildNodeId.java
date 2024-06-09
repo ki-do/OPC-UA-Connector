@@ -15,16 +15,21 @@ import com.mendix.webui.CustomJavaAction;
 
 public class OpcUaBuildNodeId extends CustomJavaAction<java.lang.String>
 {
-	private java.lang.Long Namespace;
-	private java.lang.String Identifier;
-	private java.lang.String _type;
+	private final java.lang.Long Namespace;
+	private final java.lang.String Identifier;
+	private final java.lang.String _type;
 
-	public OpcUaBuildNodeId(IContext context, java.lang.Long Namespace, java.lang.String Identifier, java.lang.String _type)
+	public OpcUaBuildNodeId(
+		IContext context,
+		java.lang.Long _namespace,
+		java.lang.String _identifier,
+		java.lang.String __type
+	)
 	{
 		super(context);
-		this.Namespace = Namespace;
-		this.Identifier = Identifier;
-		this._type = _type;
+		this.Namespace = _namespace;
+		this.Identifier = _identifier;
+		this._type = __type;
 	}
 
 	@java.lang.Override
@@ -41,6 +46,7 @@ public class OpcUaBuildNodeId extends CustomJavaAction<java.lang.String>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

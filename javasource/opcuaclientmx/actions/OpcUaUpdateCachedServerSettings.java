@@ -16,20 +16,24 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class OpcUaUpdateCachedServerSettings extends CustomJavaAction<java.lang.Void>
 {
-	private IMendixObject __ServerConfig;
-	private opcuaclientmx.proxies.OpcUaServerCfg ServerConfig;
+	/** @deprecated use ServerConfig.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ServerConfig;
+	private final opcuaclientmx.proxies.OpcUaServerCfg ServerConfig;
 
-	public OpcUaUpdateCachedServerSettings(IContext context, IMendixObject ServerConfig)
+	public OpcUaUpdateCachedServerSettings(
+		IContext context,
+		IMendixObject _serverConfig
+	)
 	{
 		super(context);
-		this.__ServerConfig = ServerConfig;
+		this.__ServerConfig = _serverConfig;
+		this.ServerConfig = _serverConfig == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), _serverConfig);
 	}
 
 	@java.lang.Override
 	public java.lang.Void executeAction() throws Exception
 	{
-		this.ServerConfig = __ServerConfig == null ? null : opcuaclientmx.proxies.OpcUaServerCfg.initialize(getContext(), __ServerConfig);
-
 		// BEGIN USER CODE
 
 		OpcUaClientManager.updateConfigIfExists(getContext(), this.ServerConfig);
@@ -40,6 +44,7 @@ public class OpcUaUpdateCachedServerSettings extends CustomJavaAction<java.lang.
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

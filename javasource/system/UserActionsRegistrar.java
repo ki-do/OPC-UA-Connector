@@ -6,7 +6,6 @@ public class UserActionsRegistrar
 {
   public void registerActions(IActionRegistrator registrator)
   {
-    registrator.bundleComponentLoaded();
     registrator.registerUserAction(encryption.actions.DecryptString.class);
     registrator.registerUserAction(encryption.actions.EncryptString.class);
     registrator.registerUserAction(encryption.actions.GeneratePGPKeyRing.class);
@@ -16,6 +15,8 @@ public class UserActionsRegistrar
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaBrowse.class);
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaBuildNodeId.class);
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaConnectionTest.class);
+    registrator.registerUserAction(opcuaclientmx.actions.OpcUaGetNodeDisplayName.class);
+    registrator.registerUserAction(opcuaclientmx.actions.OpcUaMethod.class);
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaRead.class);
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaRefreshSubscription.class);
     registrator.registerUserAction(opcuaclientmx.actions.OpcUaSubscribe.class);
