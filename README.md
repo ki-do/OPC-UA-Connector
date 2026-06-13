@@ -7,3 +7,6 @@ Please see [OPC UA Connector](https://docs.mendix.com/appstore/connectors/opc-ua
 
 ## Upgrade to Mx9
 To use this module in Mx9 you can simply download it from the Marketplace, or convert your Mendix 8 project. You will see a few consistency errors in the design properties and potentially the layout. You can let Studio convert this and get this module working in your Mendix 9 project in less than 30 seconds. 
+
+## Acknowledgement
+This work is supported by the Horizon Europe Research and Innovation Actions under grant number 101092908 (SmartEdge).
